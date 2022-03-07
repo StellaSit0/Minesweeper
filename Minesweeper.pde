@@ -40,14 +40,30 @@ public void draw ()
 public boolean isWon()
 {
     //your code here
+    int numberOfMines =  0;
+    for(int i=0;i<mines.size();i++){
+      if(mines.get(i).isFlagged()==true){
+        numberOfMines++;
+      }
+    }
+    if(numberOfMines==mines.size()){
+      return true;
+    }
     return false;
 }
 public void displayLosingMessage()
 {
+  buttons[0][0].setLabel("L");
+  buttons[0][1].setLabel("O");
+  buttons[0][2].setLabel("S");
+  buttons[0][3].setLabel("E");
     //your code here
 }
 public void displayWinningMessage()
 {
+  buttons[0][0].setLabel("W");
+  buttons[0][1].setLabel("I");
+  buttons[0][2].setLabel("N");
     //your code here
 }
 public boolean isValid(int r, int c)
@@ -61,29 +77,36 @@ public boolean isValid(int r, int c)
 public int countMines(int row, int col)
 {
   int numMines = 0;
-  if(isValid == true && buttons[row-1][col-1]){
-    numMines++;
+  for(int r=row-1;r<=row+1;r++){
+    for(int c=col-1;c<=col+1;c++){
+      if(isValid(r,c)==true && buttons[row-1][col-1].isFlagged()!=true){
+        numMines++;
+      }
+      if(isValid(r,c)==true && buttons[row-1][col].isFlagged()!=true){
+        numMines++;
+      }
+      if(isValid(r,c)==true && col<4 && buttons[row-1][col+1].isFlagged()!=true){
+        numMines++;
+      }
+      if(isValid(r,c)==true && row< 4 && buttons[row+1][col].isFlagged()!=true){
+        numMines++;
+      }
+      if(isValid(r,c)==true && row<4 && buttons[row+1][col+1].isFlagged()!=true){
+        numMines++;
+      }
+      if(isValid(r,c)==true && row < 4 && buttons[row+1][col-1].isFlagged()!=true){
+        numMines++;
+      }
+      if(isValid(r,c)==true && buttons[row][col-1].isFlagged()!=true){
+        numMines++;
+      }
+      if(isValid(r,c)==true && col< 4 && buttons[row][col+1].isFlagged()!=true){
+        numMines++;
+      }
+    }
   }
-  if(isValid == true && buttons[row-1][col]){
-    numMines++;
-  }
-  if(isValid == true && col<4 && buttons[row-1][col+1]){
-    numMines++;
-  }
-  if(isValid == true && row< 4 && buttons[row+1][col]){
-    numMines++;
-  }
-  if(isValid == true && row<4 && buttons[row+1][col+1]){
-    numMines++;
-  }
-  if(isValid == true && row < 4 && buttons[row+1][col-1]){
-    numMines++;
-  }
-  if(isValid == true && buttons[row][col-1]){
-    numMines++;
-  }
-  if(isValid == true && col< 4 && buttons[row][col+1]){
-    numMines++;
+  if(buttons[row][col].isFlagged()==true){
+    numMines--;
   }
   return numMines;
 }
@@ -111,7 +134,7 @@ public class MSButton
     public void mousePressed () 
     {
         clicked = true;
-        //if(isValid(r,c-1)&&buttons[r][c-1].clicked()){
+        //if(isValid(r,c-1)==true && buttons[r][c-1].clicked()){
         //  buttons[r][c-1].mousePressed();
         //}
     }
