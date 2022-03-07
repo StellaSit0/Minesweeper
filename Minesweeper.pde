@@ -79,28 +79,28 @@ public int countMines(int row, int col)
   int numMines = 0;
   for(int r=row-1;r<=row+1;r++){
     for(int c=col-1;c<=col+1;c++){
-      if(isValid(r,c)==true && buttons[row-1][col-1].isFlagged()!=true){
+      if(isValid(r,c)==true && buttons[row-1][col-1].isFlagged()==true){
         numMines++;
       }
-      if(isValid(r,c)==true && buttons[row-1][col].isFlagged()!=true){
+      if(isValid(r,c)==true && buttons[row-1][col].isFlagged()==true){
         numMines++;
       }
-      if(isValid(r,c)==true && col<4 && buttons[row-1][col+1].isFlagged()!=true){
+      if(isValid(r,c)==true && col<4 && buttons[row-1][col+1].isFlagged()==true){
         numMines++;
       }
-      if(isValid(r,c)==true && row< 4 && buttons[row+1][col].isFlagged()!=true){
+      if(isValid(r,c)==true && row< 4 && buttons[row+1][col].isFlagged()==true){
         numMines++;
       }
-      if(isValid(r,c)==true && row<4 && buttons[row+1][col+1].isFlagged()!=true){
+      if(isValid(r,c)==true && row<4 && buttons[row+1][col+1].isFlagged()==true){
         numMines++;
       }
-      if(isValid(r,c)==true && row < 4 && buttons[row+1][col-1].isFlagged()!=true){
+      if(isValid(r,c)==true && row < 4 && buttons[row+1][col-1].isFlagged()==true){
         numMines++;
       }
-      if(isValid(r,c)==true && buttons[row][col-1].isFlagged()!=true){
+      if(isValid(r,c)==true && buttons[row][col-1].isFlagged()==true){
         numMines++;
       }
-      if(isValid(r,c)==true && col< 4 && buttons[row][col+1].isFlagged()!=true){
+      if(isValid(r,c)==true && col< 4 && buttons[row][col+1].isFlagged()==true){
         numMines++;
       }
     }
@@ -134,7 +134,19 @@ public class MSButton
     public void mousePressed () 
     {
         clicked = true;
-        //if(isValid(r,c-1)==true && buttons[r][c-1].clicked()){
+        if(mouseButton==RIGHT){
+          if(flagged==true){
+            flagged=false;
+          }else if(flagged==false){
+            flagged=true;
+          }else if(mines.contains(this)==true){
+            displayLosingMessage();
+          }else if(countMines >0){
+          
+          }
+        }
+        //ignore trashy code
+        //if(isValid(myRow,myCol-1)==true && buttons[myRow][myCol-1].mouseButton()){
         //  buttons[r][c-1].mousePressed();
         //}
     }
