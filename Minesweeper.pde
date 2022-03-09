@@ -57,6 +57,7 @@ public void displayLosingMessage()
   buttons[0][1].setLabel("O");
   buttons[0][2].setLabel("S");
   buttons[0][3].setLabel("E");
+  
     //your code here
 }
 public void displayWinningMessage()
@@ -140,7 +141,9 @@ public class MSButton
           }else if(countMines(myRow,myCol)>0){
             buttons[myRow][myCol].setLabel(countMines(myRow,myCol));
           }else{
-            mousePressed();
+            if(isValid(myRow,myCol)&&clicked==false){
+              mousePressed();
+            }
           }
         }
         //ignore trashy code
