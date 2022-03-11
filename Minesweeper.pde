@@ -26,7 +26,7 @@ public void setMines() {
   for(int i=0;i<10;i++){
     int numberOfRows = ((int)Math.random()*NUM_ROWS);
     int numberOfCols = ((int)Math.random()*NUM_COLS);
-      if (mines.contains(buttons[numberOfRows][numberOfCols])==false) {
+      if (!mines.contains(buttons[numberOfRows][numberOfCols])) {
         mines.add(buttons[numberOfRows][numberOfCols]);
       }
   }
